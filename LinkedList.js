@@ -18,7 +18,6 @@ const linkedList = () => {
         },
         prepend(val){
             newNode = node(val);
-            console.log(newNode.value);
             if (head){
                 newNode.nextNode = head;
                 if (!tail){
@@ -27,7 +26,6 @@ const linkedList = () => {
             }
             head = newNode;
             size++;
-            console.log(size + " ll size");
         },
         at(index){
             if (index < 0 || index >= size){
@@ -35,22 +33,63 @@ const linkedList = () => {
             }
             newNode = head;
             for (let i = 0; i < index; i++){
-                console.log(newNode.value + " node value");
                 newNode = newNode.nextNode;
             }
             return newNode.value;
         },
         pop(){
-
+            if (tail && head){
+                newNode = head;
+                for (let i = 0; i < size; i++){
+                    if (newNode.nextNode == tail){
+                        newNode.nextNode = null;
+                        tail = newNode;
+                        size--;
+                        return;
+                    }
+                    newNode = newNode.nextNode;
+                }
+            }
+            else if (head){
+                head = null;
+            }
         },
         contains(val){
-
+            if (head){
+                newNode = head;
+                for (let i = 0; i < size; i++){
+                    if (newNode.value == val){
+                        return true;
+                    }
+                    newNode = newNode.nextNode;
+                }
+            }
+            return false;
         },
         find(val){
-
+            if (head){
+                newNode = head;
+                for (let i = 0; i < size; i++){
+                    if (newNode.value == val){
+                        return i;
+                    }
+                    newNode = newNode.nextNode;
+                }
+            }
+            return null;
         },
         toString(){
-
+            let myString = "";
+            if (head){
+                newNode = head;
+                console.log("value: " + newNode.value);
+                for (let i = 0; i < size; i++){
+                    myString += newNode.value + " -> ";
+                    newNode = newNode.nextNode;
+                }
+            }
+            myString += "null";
+            return myString;
         },
         getSize(){
             return size;
